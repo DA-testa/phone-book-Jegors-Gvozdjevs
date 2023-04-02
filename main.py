@@ -28,30 +28,19 @@ def process_queries(queries):
                     break
             else: # otherwise, just add it
                 contacts.append(cur_query)
-
         elif cur_query.type == 'del':
             for j in range(len(contacts)):
                 if contacts[j].number == cur_query.number:
                     contacts.pop(j)
                     break
-
-        if cur_query.type == 'find':
-            response = None
+        else:
+            response = 'not found'
             for contact in contacts:
                 if contact.number == cur_query.number:
                     response = contact.name
                     break
-        else:
-            for contact in contacts:
-                if contact.number == cur_query.number:
-                    response = 'not found'
-                    break
-
-
             result.append(response)
     return result
 
 if __name__ == '__main__':
     write_responses(process_queries(read_queries()))
-
-
